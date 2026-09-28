@@ -1,6 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { CalendarDays, CreditCard, MousePointerClick, Smartphone } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState, type KeyboardEvent } from 'react'
 
 import { useI18n } from '../../i18n/I18nProvider'
 import { AgendaMock } from '../mock/AgendaMock'
@@ -32,6 +32,22 @@ export function DemoSection({ className }: { className?: string }) {
   const { m, locale } = useI18n()
   const reduceMotion = useReducedMotion()
   const [tab, setTab] = useState<DemoTab>('agenda')
+  const tabRefs = useRef<Record<DemoTab, HTMLButtonElement | null>>({ agenda: null, booking: null, payment: null })
+
+  /** Navigation clavier standard d'un tablist (flèches + début/fin). */
+  const onTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const last = tabs.length - 1
+    let nextIndex: number | null = null
+    if (event.key === 'ArrowRight') nextIndex = index === last ? 0 : index + 1
+    else if (event.key === 'ArrowLeft') nextIndex = index === 0 ? last : index - 1
+    else if (event.key === 'Home') nextIndex = 0
+    else if (event.key === 'End') nextIndex = last
+    if (nextIndex === null) return
+    event.preventDefault()
+    const next = tabs[nextIndex].id
+    setTab(next)
+    tabRefs.current[next]?.focus()
+  }
 
   const tabs: { id: DemoTab; label: string; icon: typeof CalendarDays }[] = [
     { id: 'agenda', label: m.demo.tabAgenda, icon: CalendarDays },
@@ -77,14 +93,21 @@ export function DemoSection({ className }: { className?: string }) {
           aria-label={m.demo.eyebrow}
           className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-line bg-surface-2 p-1"
         >
-          {tabs.map((item) => {
+          {tabs.map((item, index) => {
             const isActive = item.id === tab
             return (
               <button
                 key={item.id}
+                ref={(node) => {
+                  tabRefs.current[item.id] = node
+                }}
+                id={`demo-tab-${item.id}`}
                 type="button"
                 role="tab"
                 aria-selected={isActive}
+                aria-controls="demo-tabpanel"
+                tabIndex={isActive ? 0 : -1}
+                onKeyDown={(event) => onTabKeyDown(event, index)}
                 onClick={() => setTab(item.id)}
                 className={cn(
                   'relative inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2.5 text-[13.5px] font-semibold transition-colors duration-200',
@@ -107,6 +130,13 @@ export function DemoSection({ className }: { className?: string }) {
       </div>
 
       <div className="mt-12 grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <div
+          id="demo-tabpanel"
+          role="tabpanel"
+          aria-labelledby={`demo-tab-${tab}`}
+          tabIndex={-1}
+          className="focus-visible:outline-none"
+        >
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={tab}
@@ -132,6 +162,7 @@ export function DemoSection({ className }: { className?: string }) {
             )}
           </motion.div>
         </AnimatePresence>
+        </div>
 
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
