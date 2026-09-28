@@ -33,8 +33,8 @@ export const fr = {
   hero: {
     badge: 'Nouveau · Rappels WhatsApp et paiement Mobile Money',
     titleLead: 'Vos clients réservent',
-    titleHighlight: 'en ligne, 24h/24',
-    titleTail: '. Vous, vous remplissez votre agenda.',
+    titleHighlight: 'chaque jour',
+    titleTail: '',
     subtitle:
       "L'agenda en ligne de votre clinique, de votre salon ou de votre spa. Réservation en 30 secondes, confirmations instantanées, rappels automatiques et encaissement MTN MoMo ou Orange Money.",
     ctaPrimary: 'Essayer gratuitement 14 jours',
@@ -236,8 +236,8 @@ export const en: Messages = {
   hero: {
     badge: 'New · WhatsApp reminders and Mobile Money payments',
     titleLead: 'Your customers book',
-    titleHighlight: 'online, 24/7',
-    titleTail: '. You fill your calendar.',
+    titleHighlight: 'every day',
+    titleTail: '',
     subtitle:
       'The online calendar for your clinic, salon or spa. Book in 30 seconds, instant confirmations, automatic reminders and MTN MoMo or Orange Money checkout.',
     ctaPrimary: 'Start your 14-day free trial',

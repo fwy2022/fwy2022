@@ -46,7 +46,7 @@ export function Hero() {
             <Reveal delay={0.06}>
               <h1 className="mt-5 text-[2.1rem] leading-[1.08] font-extrabold text-balance text-ink sm:text-5xl lg:text-[3.65rem]">
                 {m.hero.titleLead}{' '}
-                <span className="relative inline-block">
+                <span className="relative inline-block lg:block">
                   <span className="text-gradient-brand">{m.hero.titleHighlight}</span>
                   <svg
                     aria-hidden
