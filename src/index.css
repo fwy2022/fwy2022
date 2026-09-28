@@ -1,0 +1,387 @@
+@import 'tailwindcss';
+
+@import '@fontsource-variable/plus-jakarta-sans';
+
+/* Dark mode is driven by a class on <html> so users can force light or dark. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ==========================================================================
+   Design tokens — RDVPro
+   Palette: teal / turquoise apaisant + accent chaud corail & doré
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  --background: #f6faf9;
+  --background-soft: #ecf4f3;
+  --surface: #ffffff;
+  --surface-2: #f3f8f7;
+  --surface-3: #e9f2f1;
+  --border: #e0eae9;
+  --border-strong: #c8d9d7;
+
+  --text: #062421;
+  --text-muted: #556f6c;
+  --text-subtle: #8aa3a0;
+  --text-inverse: #ffffff;
+
+  --brand: #0f8a83;
+  --brand-hover: #0b6f69;
+  --brand-active: #095a55;
+  --brand-soft: #e4f5f3;
+  --brand-soft-hover: #d3ece9;
+  --on-brand: #ffffff;
+
+  --accent: #f2663d;
+  --accent-hover: #dc5530;
+  --accent-soft: #ffeee8;
+  --on-accent: #ffffff;
+
+  --gold: #d99a1f;
+  --gold-soft: #fdf3dd;
+  --on-gold: #3b2a05;
+
+  --success: #12805c;
+  --success-soft: #e2f6ee;
+  --warning: #b45309;
+  --warning-soft: #fdf0dc;
+  --danger: #c62f36;
+  --danger-soft: #fdeaea;
+  --info: #146c94;
+  --info-soft: #e4f2f9;
+
+  --ring: color-mix(in oklab, var(--brand) 45%, transparent);
+  --header-bg: color-mix(in oklab, var(--background) 82%, transparent);
+
+  --shadow-soft: 0 1px 2px -1px rgb(6 36 33 / 0.08), 0 4px 16px -6px rgb(6 36 33 / 0.1);
+  --shadow-card: 0 1px 2px -1px rgb(6 36 33 / 0.06), 0 12px 32px -18px rgb(6 36 33 / 0.28);
+  --shadow-lift: 0 2px 4px -2px rgb(6 36 33 / 0.1), 0 24px 48px -24px rgb(6 36 33 / 0.35);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--brand) 22%, transparent),
+    0 18px 40px -22px color-mix(in oklab, var(--brand) 65%, transparent);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --background: #041614;
+  --background-soft: #061e1c;
+  --surface: #08211f;
+  --surface-2: #0b2a27;
+  --surface-3: #0f3531;
+  --border: #123c38;
+  --border-strong: #1b524d;
+
+  --text: #e7f4f2;
+  --text-muted: #9bb4b1;
+  --text-subtle: #6d8a87;
+  --text-inverse: #062421;
+
+  --brand: #2ebcb0;
+  --brand-hover: #45cabd;
+  --brand-active: #63d5ca;
+  --brand-soft: #0d3330;
+  --brand-soft-hover: #11403c;
+  --on-brand: #032523;
+
+  --accent: #ff8a65;
+  --accent-hover: #ff9c7c;
+  --accent-soft: #3a1c13;
+  --on-accent: #2b0d05;
+
+  --gold: #e8b558;
+  --gold-soft: #3a2b0d;
+  --on-gold: #fdf0d5;
+
+  --success: #34d399;
+  --success-soft: #0c2f26;
+  --warning: #fbbf24;
+  --warning-soft: #33240a;
+  --danger: #f87171;
+  --danger-soft: #3a1416;
+  --info: #38bdf8;
+  --info-soft: #0a2b38;
+
+  --ring: color-mix(in oklab, var(--brand) 55%, transparent);
+  --header-bg: color-mix(in oklab, var(--background) 78%, transparent);
+
+  --shadow-soft: 0 1px 2px -1px rgb(0 0 0 / 0.4), 0 4px 16px -6px rgb(0 0 0 / 0.5);
+  --shadow-card: 0 1px 2px -1px rgb(0 0 0 / 0.35), 0 12px 32px -18px rgb(0 0 0 / 0.8);
+  --shadow-lift: 0 2px 4px -2px rgb(0 0 0 / 0.45), 0 24px 48px -24px rgb(0 0 0 / 0.9);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--brand) 35%, transparent),
+    0 18px 40px -22px color-mix(in oklab, var(--brand) 55%, transparent);
+}
+
+@theme inline {
+  /* Plus Jakarta Sans en Variable (bundlée localement : pas de requête Google,
+     l'application reste lisible hors-ligne et sur connexion lente). */
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'Menlo', monospace;
+
+  --color-background: var(--background);
+  --color-background-soft: var(--background-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+
+  --color-ink: var(--text);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-subtle: var(--text-subtle);
+  --color-ink-inverse: var(--text-inverse);
+
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-active: var(--brand-active);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-soft-hover: var(--brand-soft-hover);
+  --color-on-brand: var(--on-brand);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-on-gold: var(--on-gold);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --shadow-soft: var(--shadow-soft);
+  --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
+  --shadow-glow: var(--shadow-glow);
+
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.75rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-fade-up: fade-up 0.5s var(--ease-out-expo) both;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.4s ease-out infinite;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-feature-settings: 'ss01', 'cv01';
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--brand) 28%, transparent);
+    color: var(--text);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Slim, unobtrusive scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 999px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility text-gradient-brand {
+  background-image: linear-gradient(
+    100deg,
+    var(--brand) 0%,
+    color-mix(in oklab, var(--brand) 55%, var(--accent)) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--border) 60%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--brand) 26%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+@utility surface-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+@utility glass {
+  background-color: var(--header-bg);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+}
+
+@utility skeleton {
+  background-image: linear-gradient(
+    90deg,
+    var(--surface-2) 0%,
+    var(--surface-3) 40%,
+    var(--surface-2) 80%
+  );
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Respect users who ask for less motion — WCAG 2.3.3 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
